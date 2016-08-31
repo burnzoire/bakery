@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Item:</strong>
+  <%= @item_pack.item %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @item_pack.quantity %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @item_pack.price %>
+</p>
+
+<%= link_to 'Edit', edit_item_pack_path(@item_pack) %> |
+<%= link_to 'Back', item_packs_path %>

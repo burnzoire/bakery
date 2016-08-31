@@ -11,9 +11,65 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20160831054206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "customers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "item_packs", force: :cascade do |t|
+    t.integer  "item_id"
+    t.integer  "quantity"
+    t.float    "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "item_packs", ["item_id"], name: "index_item_packs_on_item_id", using: :btree
+
+  create_table "items", force: :cascade do |t|
+    t.string   "code"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "order_item_histories", force: :cascade do |t|
+    t.integer  "order_item_id"
+    t.integer  "quantity"
+    t.float    "price"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "order_item_histories", ["order_item_id"], name: "index_order_item_histories_on_order_item_id", using: :btree
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer  "order_id"
+    t.integer  "item_id"
+    t.integer  "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "order_items", ["item_id"], name: "index_order_items_on_item_id", using: :btree
+  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "customer_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "orders", ["customer_id"], name: "index_orders_on_customer_id", using: :btree
+
+  add_foreign_key "item_packs", "items"
+  add_foreign_key "order_item_histories", "order_items"
+  add_foreign_key "order_items", "items"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "customers"
 end
