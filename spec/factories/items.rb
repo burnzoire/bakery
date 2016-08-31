@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :item do
-    code "MyString"
-    name "MyString"
+    code "VS"
+    name "Vegemite Scroll"
   end
 end
