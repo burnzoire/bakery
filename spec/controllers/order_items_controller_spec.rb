@@ -126,10 +126,14 @@ RSpec.describe OrderItemsController, type: :controller do
   end
 
   describe "DELETE #destroy" do
+    # create order item first so change in count can be measured
+    let!(:order_item) { FactoryGirl.create(:order_item)}
+    
     it "destroys the requested order_item" do
       expect {
         delete :destroy, id: order_item.to_param, session: valid_session
       }.to change(OrderItem, :count).by(-1)
+      
     end
 
     it "redirects to the order_items list" do
