@@ -1,0 +1,1 @@
+json.array! @order_item_histories, partial: 'order_item_histories/order_item_history', as: :order_item_history

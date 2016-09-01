@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :order_item_histories
+  resources :order_items
+  resources :item_packs
+  resources :items
+  resources :orders
+  resources :customers
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

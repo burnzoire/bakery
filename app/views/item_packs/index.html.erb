@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Item Packs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @item_packs.each do |item_pack| %>
+      <tr>
+        <td><%= item_pack.item %></td>
+        <td><%= item_pack.quantity %></td>
+        <td><%= item_pack.price %></td>
+        <td><%= link_to 'Show', item_pack %></td>
+        <td><%= link_to 'Edit', edit_item_pack_path(item_pack) %></td>
+        <td><%= link_to 'Destroy', item_pack, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Item pack', new_item_pack_path %>
