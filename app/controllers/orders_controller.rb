@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
 
   # GET /orders/new
   def new
-    @order = Order.new
+    @order = Order.new(customer: @customer)
   end
 
   # GET /orders/1/edit
@@ -25,8 +25,7 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(order_params)
-    @order.customer = @customer
+    @order = Order.new(order_params.merge(customer: @customer))
 
     respond_to do |format|
       if @order.save
@@ -69,7 +68,7 @@ class OrdersController < ApplicationController
       @order = Order.find(params[:id])
     end
 
-    # This is just placeholder for this challenge. Assume usual user session stuff
+    # This is just placeholder. Assume usual user session stuff
     def set_customer
       @customer = Customer.first
     end

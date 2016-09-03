@@ -15,7 +15,7 @@ class OrderItemsController < ApplicationController
 
   # GET /order_items/new
   def new
-    @order_item = OrderItem.new
+    @order_item = OrderItem.new(order_id: @order.id, quantity: 1)
   end
 
   # GET /order_items/1/edit
@@ -25,11 +25,10 @@ class OrderItemsController < ApplicationController
   # POST /order_items
   # POST /order_items.json
   def create
-    @order_item = OrderItem.new(order_item_params)
-
+    @order_item = OrderItem.new(order_item_params.merge(order_id: @order.id))
     respond_to do |format|
       if @order_item.save
-        format.html { redirect_to @order_item, notice: 'Order item was successfully created.' }
+        format.html { redirect_to @order_item, notice: 'Item added to order.' }
         format.json { render :show, status: :created, location: @order_item }
       else
         format.html { render :new }
@@ -43,7 +42,7 @@ class OrderItemsController < ApplicationController
   def update
     respond_to do |format|
       if @order_item.update(order_item_params)
-        format.html { redirect_to @order_item, notice: 'Order item was successfully updated.' }
+        format.html { redirect_to @order_item, notice: 'Quantity updated.' }
         format.json { render :show, status: :ok, location: @order_item }
       else
         format.html { render :edit }
@@ -57,14 +56,14 @@ class OrderItemsController < ApplicationController
   def destroy
     @order_item.destroy
     respond_to do |format|
-      format.html { redirect_to order_order_items_url(order_id: @order.id), notice: 'Order item was successfully destroyed.' }
+      format.html { redirect_to order_order_items_url(order_id: @order_item.order_id), notice: 'Item removed from order.' }
       format.json { head :no_content }
     end
   end
 
   private
     def set_order
-      @order = Order.find(params[:order_id])
+      @order = Order.find(params[:order_id]) if params[:order_id]
     end
 
     # Use callbacks to share common setup or constraints between actions.

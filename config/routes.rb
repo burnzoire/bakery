@@ -9,6 +9,7 @@ Rails.application.routes.draw do
         resources :order_item_histories
       end
     end
+
   end
   
   resources :customers

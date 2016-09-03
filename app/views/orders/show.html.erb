@@ -1,9 +1,17 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Customer:</strong>
-  <%= @order.customer %>
+  <strong>Created:</strong>
+  <%= @order.created_at.strftime("%m/%d/%Y") %>
 </p>
+
+<p>
+  <strong>Total:</strong>
+  <%= number_to_currency(@order.total) %>
+</p>
+
+
+<%= link_to 'Order Details', order_order_items_path(order_id: @order.id) %> |
 
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>
