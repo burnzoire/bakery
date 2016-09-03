@@ -29,7 +29,7 @@ class ItemPacksController < ApplicationController
 
     respond_to do |format|
       if @item_pack.save
-        format.html { redirect_to [@item, @item_pack], notice: 'Item pack was successfully created.' }
+        format.html { redirect_to @item_pack, notice: 'Item pack was successfully created.' }
         format.json { render :show, status: :created, location: @item_pack }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class ItemPacksController < ApplicationController
   def update
     respond_to do |format|
       if @item_pack.update(item_pack_params)
-        format.html { redirect_to [@item, @item_pack], notice: 'Item pack was successfully updated.' }
+        format.html { redirect_to @item_pack, notice: 'Item pack was successfully updated.' }
         format.json { render :show, status: :ok, location: @item_pack }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class ItemPacksController < ApplicationController
   def destroy
     @item_pack.destroy
     respond_to do |format|
-      format.html { redirect_to item_item_packs_url, notice: 'Item pack was successfully destroyed.' }
+      format.html { redirect_to item_item_packs_url(item_id: @item.id), notice: 'Item pack was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -66,6 +66,7 @@ class ItemPacksController < ApplicationController
     def set_item
       @item = Item.find(params[:item_id])
     end
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_item_pack
       @item_pack = ItemPack.find(params[:id])

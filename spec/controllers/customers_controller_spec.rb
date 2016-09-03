@@ -11,7 +11,7 @@ RSpec.describe CustomersController, type: :controller do
   describe "GET #index" do
     it "assigns all customers as @customers" do
       get :index, params: {}, session: valid_session
-      expect(assigns(:customers)).to eq([customer])
+      expect(assigns(:customers).count).to eq(Customer.count)
     end
   end
 

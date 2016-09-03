@@ -1,5 +1,6 @@
 class OrderItemsController < ApplicationController
   before_action :set_order_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_order
 
   # GET /order_items
   # GET /order_items.json
@@ -56,12 +57,16 @@ class OrderItemsController < ApplicationController
   def destroy
     @order_item.destroy
     respond_to do |format|
-      format.html { redirect_to order_items_url, notice: 'Order item was successfully destroyed.' }
+      format.html { redirect_to order_order_items_url(order_id: @order.id), notice: 'Order item was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
+    def set_order
+      @order = Order.find(params[:order_id])
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_order_item
       @order_item = OrderItem.find(params[:id])

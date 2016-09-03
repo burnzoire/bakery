@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ItemPacksController, type: :controller do
   let(:item) { FactoryGirl.create(:item) }
 
-  let(:valid_attributes) { FactoryGirl.attributes_for(:item_pack, item_id: item.id) }
+  let(:valid_attributes) { FactoryGirl.attributes_for(:item_pack) }
 
   let(:invalid_attributes) { FactoryGirl.attributes_for(:item_pack, price: "free") }
 
@@ -55,7 +55,7 @@ RSpec.describe ItemPacksController, type: :controller do
 
       it "redirects to the created item_pack" do
         post :create, item_id: item.id, item_pack: valid_attributes, session: valid_session
-        expect(response).to redirect_to([item, ItemPack.last])
+        expect(response).to redirect_to(ItemPack.last)
       end
     end
 
@@ -91,7 +91,7 @@ RSpec.describe ItemPacksController, type: :controller do
 
       it "redirects to the item_pack" do
         put :update, item_id: item.id, id: item_pack.to_param, item_pack: valid_attributes, session: valid_session
-        expect(response).to redirect_to([item, item_pack])
+        expect(response).to redirect_to(item_pack)
       end
     end
 
@@ -118,7 +118,7 @@ RSpec.describe ItemPacksController, type: :controller do
 
     it "redirects to the item_packs list" do
       delete :destroy, item_id: item.id, id: item_pack.to_param, session: valid_session
-      expect(response).to redirect_to(item_item_packs_url)
+      expect(response).to redirect_to(item_item_packs_url(item_id: item.id))
     end
   end
 
