@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :item do
-    code "VS"
+    sequence(:code) { |n| "CODE#{n}" }
     name "Vegemite Scroll"
   end
 end
