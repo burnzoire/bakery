@@ -43,7 +43,7 @@ class OrderItem < ActiveRecord::Base
 private
 
   # background: greedy-first solution insufficient for lists of any denomination
-  # optimal change solution from http://rubyquiz.com/quiz154.html
+  # optimal change solution based on http://rubyquiz.com/quiz154.html
   def make_change(a, list = [25, 10, 5, 1])
     return [] if a < 0
     return [] if a != a.floor
