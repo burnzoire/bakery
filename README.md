@@ -94,4 +94,4 @@ With a bit more time, the few areas would be improved:
 
 - Adding an order item of an existing item should add to the quantity rather than appearing as another order item (validating uniqueness on item_id).
 
-- Add the ability to edit an order item - currently the order item histories are built before creation, I'd prefer to allow existing histories to be updated as quantity is updates.
+- Add the ability to edit an order item - currently the order item histories are built before creation, I'd prefer to allow existing histories to be updated as quantity is updates. 
