@@ -8,9 +8,9 @@ A bakery used to base the price of their produce on an individual item cost. So 
 
 Name | Code | Packs 
 -----|------|------
-Vegemite Scroll | VS5 | 3 @ $6.99 | 5 @ $8.99 
-Blueberry Muffin | MB11 | 2 @ $9.95 |  5 @ $16.95 |  8 @ $24.95 
-Croissant | CF | 3 @ $5.95 |  5 @ $9.95 |  9 @ $16.99 
+Vegemite Scroll | VS5 | 3 @ $6.99, 5 @ $8.99
+Blueberry Muffin | MB11 | 2 @ $9.95, 5 @ $16.95, 8 @ $24.95
+Croissant | CF | 3 @ $5.95<br>5 @ $9.95, 9 @ $16.99 
 
 ### Task:  
 
@@ -94,4 +94,4 @@ With a bit more time, the few areas would be improved:
 
 - Adding an order item of an existing item should add to the quantity rather than appearing as another order item (validating uniqueness on item_id).
 
-- Add the ability to edit an order item - currently the order item histories are built before creation, I'd prefer to allow existing histories to be updated as quantity is updates. 
+- Add the ability to edit an order item - currently the order item histories are built before creation, I'd prefer to allow existing histories to be updated as quantity is updates.
