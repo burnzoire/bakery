@@ -56,7 +56,10 @@ A successfully passing test(s) that demonstrates the following output:
 
 ## Setup
 
-This repository is backed by a docker configuration. To start the application, first set up the databases with the following command:
+### Pre-requisites
+This repository is backed by a docker configuration. Tested with Docker version 1.12 and docker-compose version 1.8.
+
+To start the application, first set up the databases with the following command:
 
 ```
 docker-compose run --rm web rake db:setup
@@ -88,4 +91,3 @@ With a bit more time, the few areas would be improved:
 - Add the ability to edit an order item - currently the order item histories are built before creation, I'd prefer to allow existing histories to be updated as quantity is updates.
 
 - Of course the UI is basic but I felt it fits the brief OK. It's not a store I'd enjoy using!
-
