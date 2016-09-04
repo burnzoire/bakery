@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831054206) do
+ActiveRecord::Schema.define(version: 20160904064522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,11 +41,13 @@ ActiveRecord::Schema.define(version: 20160831054206) do
   create_table "order_item_histories", force: :cascade do |t|
     t.integer  "order_item_id"
     t.integer  "quantity"
-    t.float    "price"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.float    "price_per_pack"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "item_pack_id"
   end
 
+  add_index "order_item_histories", ["item_pack_id"], name: "index_order_item_histories_on_item_pack_id", using: :btree
   add_index "order_item_histories", ["order_item_id"], name: "index_order_item_histories_on_order_item_id", using: :btree
 
   create_table "order_items", force: :cascade do |t|
@@ -68,6 +70,7 @@ ActiveRecord::Schema.define(version: 20160831054206) do
   add_index "orders", ["customer_id"], name: "index_orders_on_customer_id", using: :btree
 
   add_foreign_key "item_packs", "items"
+  add_foreign_key "order_item_histories", "item_packs"
   add_foreign_key "order_item_histories", "order_items"
   add_foreign_key "order_items", "items"
   add_foreign_key "order_items", "orders"

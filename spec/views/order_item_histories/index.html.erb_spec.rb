@@ -6,12 +6,12 @@ RSpec.describe "order_item_histories/index", type: :view do
       OrderItemHistory.create!(
         :order_item => nil,
         :quantity => 2,
-        :price => 3.5
+        :price_per_pack => 3.5
       ),
       OrderItemHistory.create!(
         :order_item => nil,
         :quantity => 2,
-        :price => 3.5
+        :price_per_pack => 3.5
       )
     ])
   end

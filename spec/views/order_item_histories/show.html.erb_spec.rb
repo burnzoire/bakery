@@ -5,7 +5,7 @@ RSpec.describe "order_item_histories/show", type: :view do
     @order_item_history = assign(:order_item_history, OrderItemHistory.create!(
       :order_item => nil,
       :quantity => 2,
-      :price => 3.5
+      :price_per_pack => 3.5
     ))
   end
 

@@ -1,8 +1,20 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Order Item Histories</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Order item</th>
+      <th>Quantity</th>
+      <th>Subtotal</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
 
-<%= render @order_item_histories %>
+  <tbody>
+    <%= render @order_item_histories %>
+  </tbody>
+</table>
 
 <br>
 

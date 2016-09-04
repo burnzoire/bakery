@@ -7,6 +7,7 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :order_items, allow_destroy: true
 
   def total
-  	order_item_histories.sum(:price)
+  	# sum all history subtotals
+    order_item_histories.map{|h| h.subtotal}.inject(0){|sum,v| sum + v }
   end
 end

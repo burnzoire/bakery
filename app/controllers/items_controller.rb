@@ -10,6 +10,7 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
+    @item_packs = @item.item_packs
   end
 
   # GET /items/new

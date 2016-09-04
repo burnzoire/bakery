@@ -74,6 +74,6 @@ class OrderItemHistoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_item_history_params
-      params.require(:order_item_history).permit(:order_item_id, :quantity, :price)
+      params.require(:order_item_history).permit(:order_item_id, :quantity, :price_per_pack)
     end
 end

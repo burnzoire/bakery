@@ -1,0 +1,6 @@
+<tr>
+  <td><%= item_pack.quantity %></td>
+  <td><%= item_pack.price %></td>
+  <td><%= link_to 'Edit', edit_item_pack_path(item_pack) %></td>
+  <td><%= link_to 'Remove', item_pack, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>

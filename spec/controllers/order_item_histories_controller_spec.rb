@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe OrderItemHistoriesController, type: :controller do
   let(:order_item) { FactoryGirl.create(:order_item) }
   let(:valid_attributes) { FactoryGirl.attributes_for(:order_item_history) }
-  let(:invalid_attributes) { FactoryGirl.attributes_for(:order_item_history, price: "free") }
+  let(:invalid_attributes) { FactoryGirl.attributes_for(:order_item_history, price_per_pack: "free") }
 
   let(:valid_session) { {} }
 
@@ -73,13 +73,13 @@ RSpec.describe OrderItemHistoriesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        FactoryGirl.attributes_for(:order_item_history, price: 99.99)
+        FactoryGirl.attributes_for(:order_item_history, price_per_pack: 99.99)
       }
 
       it "updates the requested order_item_history" do
         put :update, order_item_id: order_item.id, id: order_item_history.to_param, order_item_history: new_attributes, session: valid_session
         order_item_history.reload
-        expect(order_item_history.price).to eq(new_attributes[:price])
+        expect(order_item_history.price).to eq(new_attributes[:price_per_pack])
       end
 
       it "assigns the requested order_item_history as @order_item_history" do
