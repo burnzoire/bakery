@@ -90,4 +90,4 @@ With a bit more time, the few areas would be improved:
 
 - Add the ability to edit an order item - currently the order item histories are built before creation, I'd prefer to allow existing histories to be updated as quantity is updates.
 
-- Of course the UI is basic but I felt it fits the brief OK. It's not a store I'd enjoy using!
+- Of course the UI is basic but I felt it fits the brief OK. It can be accessed at `http://localhost:3000/orders`. Create an order, and then add items as desired... yum yum. Items and their packs can be modified from `http://localhost:3000/items`.
