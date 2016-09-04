@@ -10,5 +10,7 @@
   <%= @order_item.quantity %>
 </p>
 
+<%= render @order_item_histories %>
+
 <%= link_to 'Edit', edit_order_item_path(@order_item) %> |
-<%= link_to 'Back to Order', order_order_items_path(order_id: @order_item.order_id) %>
+<%= link_to 'Back to Order', @order_item.order %>

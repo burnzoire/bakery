@@ -9,7 +9,7 @@ RSpec.describe OrderItemsController, type: :controller do
 
   let(:valid_session) { {} }
 
-  let(:order_item) { FactoryGirl.create(:order_item)}
+  let(:order_item) { FactoryGirl.create(:order_item, order: order)}
 
   describe "GET #index" do
     it "assigns all order_items as @order_items" do
@@ -55,7 +55,7 @@ RSpec.describe OrderItemsController, type: :controller do
 
       it "redirects to the created order_item" do
         post :create, order_id: order.id, order_item: valid_attributes, session: valid_session
-        expect(response).to redirect_to(OrderItem.last)
+        expect(response).to redirect_to(order)
       end
     end
 
@@ -91,7 +91,7 @@ RSpec.describe OrderItemsController, type: :controller do
 
       it "redirects to the order_item" do
         put :update, order_id: order.id, id: order_item.to_param, order_item: valid_attributes, session: valid_session
-        expect(response).to redirect_to(order_item)
+        expect(response).to redirect_to(order)
       end
     end
 
@@ -112,13 +112,13 @@ RSpec.describe OrderItemsController, type: :controller do
     let!(:order_item) { FactoryGirl.create(:order_item)}
     it "destroys the requested order_item" do
       expect {
-        delete :destroy, order_id: order.id, id: order_item.to_param, session: valid_session
+        delete :destroy, order_id: order_item.order_id, id: order_item.to_param, session: valid_session
       }.to change(OrderItem, :count).by(-1)  
     end
 
     it "redirects to the order_items list" do
-      delete :destroy, order_id: order.id, id: order_item.to_param, session: valid_session
-      expect(response).to redirect_to(order_order_items_url(order_id: order.id))
+      delete :destroy, order_id: order_item.order_id, id: order_item.to_param, session: valid_session
+      expect(response).to redirect_to(order_item.order)
     end
   end
 

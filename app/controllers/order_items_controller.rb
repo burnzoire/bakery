@@ -11,6 +11,7 @@ class OrderItemsController < ApplicationController
   # GET /order_items/1
   # GET /order_items/1.json
   def show
+    @order_item_histories = @order_item.order_item_histories
   end
 
   # GET /order_items/new
@@ -28,7 +29,7 @@ class OrderItemsController < ApplicationController
     @order_item = OrderItem.new(order_item_params.merge(order_id: @order.id))
     respond_to do |format|
       if @order_item.save
-        format.html { redirect_to @order_item, notice: 'Item added to order.' }
+        format.html { redirect_to order_path(@order_item.order), notice: 'Item added to order.' }
         format.json { render :show, status: :created, location: @order_item }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class OrderItemsController < ApplicationController
   def update
     respond_to do |format|
       if @order_item.update(order_item_params)
-        format.html { redirect_to @order_item, notice: 'Quantity updated.' }
+        format.html { redirect_to order_path(@order_item.order), notice: 'Quantity updated.' }
         format.json { render :show, status: :ok, location: @order_item }
       else
         format.html { render :edit }
@@ -56,7 +57,7 @@ class OrderItemsController < ApplicationController
   def destroy
     @order_item.destroy
     respond_to do |format|
-      format.html { redirect_to order_order_items_url(order_id: @order_item.order_id), notice: 'Item removed from order.' }
+      format.html { redirect_to order_path(@order_item.order), notice: 'Item removed from order.' }
       format.json { head :no_content }
     end
   end

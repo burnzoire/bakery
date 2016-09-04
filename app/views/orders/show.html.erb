@@ -5,13 +5,24 @@
   <%= @order.created_at.strftime("%m/%d/%Y") %>
 </p>
 
+<table>
+  <thead>
+    <tr>
+      <th colspan="2">Item</th>
+      <th>Subtotal</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= render @order_items %>
+  </tbody>
+</table>
 <p>
   <strong>Total:</strong>
   <%= number_to_currency(@order.total) %>
 </p>
-
-
-<%= link_to 'Order Details', order_order_items_path(order_id: @order.id) %> |
-
-<%= link_to 'Edit', edit_order_path(@order) %> |
+<br>
+<%= link_to 'Add New Item', new_order_order_item_path(order_id: @order.id) %> |
+<%= link_to 'Edit Details', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>
