@@ -4,7 +4,7 @@ class OrderItemHistory < ActiveRecord::Base
   has_one :item, through: :item_pack
 
   validates_numericality_of :quantity
-  validates_numericality_of :price_per_pack
+  validates_numericality_of :price_per_pack 
 
   def subtotal
   	quantity * price_per_pack

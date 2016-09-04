@@ -53,7 +53,7 @@ RSpec.describe OrderItemsController, type: :controller do
         expect(assigns(:order_item)).to be_persisted
       end
 
-      it "redirects to the created order_item" do
+      it "redirects to the order" do
         post :create, order_id: order.id, order_item: valid_attributes, session: valid_session
         expect(response).to redirect_to(order)
       end
@@ -89,7 +89,7 @@ RSpec.describe OrderItemsController, type: :controller do
         expect(assigns(:order_item)).to eq(order_item)
       end
 
-      it "redirects to the order_item" do
+      it "redirects to the order" do
         put :update, order_id: order.id, id: order_item.to_param, order_item: valid_attributes, session: valid_session
         expect(response).to redirect_to(order)
       end
@@ -116,7 +116,7 @@ RSpec.describe OrderItemsController, type: :controller do
       }.to change(OrderItem, :count).by(-1)  
     end
 
-    it "redirects to the order_items list" do
+    it "redirects to the order" do
       delete :destroy, order_id: order_item.order_id, id: order_item.to_param, session: valid_session
       expect(response).to redirect_to(order_item.order)
     end

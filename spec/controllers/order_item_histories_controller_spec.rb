@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe OrderItemHistoriesController, type: :controller do
-  let(:order_item) { FactoryGirl.create(:order_item) }
+  let!(:order_item) { FactoryGirl.create(:order_item) }
   let(:valid_attributes) { FactoryGirl.attributes_for(:order_item_history) }
   let(:invalid_attributes) { FactoryGirl.attributes_for(:order_item_history, price_per_pack: "free") }
 
@@ -12,7 +12,7 @@ RSpec.describe OrderItemHistoriesController, type: :controller do
   describe "GET #index" do
     it "assigns all order_item_histories as @order_item_histories" do
       get :index, order_item_id: order_item.id, session: valid_session
-      expect(assigns(:order_item_histories)).to eq([order_item_history])
+      expect(assigns(:order_item_histories)).to eq(order_item.order_item_histories)
     end
   end
 
@@ -79,7 +79,7 @@ RSpec.describe OrderItemHistoriesController, type: :controller do
       it "updates the requested order_item_history" do
         put :update, order_item_id: order_item.id, id: order_item_history.to_param, order_item_history: new_attributes, session: valid_session
         order_item_history.reload
-        expect(order_item_history.price).to eq(new_attributes[:price_per_pack])
+        expect(order_item_history.price_per_pack).to eq(new_attributes[:price_per_pack])
       end
 
       it "assigns the requested order_item_history as @order_item_history" do

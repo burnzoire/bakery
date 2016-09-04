@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ItemPacksController, type: :controller do
-  let(:item) { FactoryGirl.create(:item) }
+  let!(:item) { FactoryGirl.create(:item) }
 
   let(:valid_attributes) { FactoryGirl.attributes_for(:item_pack) }
 
@@ -9,12 +9,12 @@ RSpec.describe ItemPacksController, type: :controller do
 
   let(:valid_session) { {} }
 
-  let(:item_pack) { FactoryGirl.create(:item_pack)}
+  let(:item_pack) { FactoryGirl.create(:item_pack, item: item)}
 
   describe "GET #index" do
     it "assigns all item_packs as @item_packs" do
       get :index, item_id: item.id, session: valid_session
-      expect(assigns(:item_packs)).to eq([item_pack])
+      expect(assigns(:item_packs)).to eq(item.item_packs)
     end
   end
 
@@ -53,9 +53,9 @@ RSpec.describe ItemPacksController, type: :controller do
         expect(assigns(:item_pack)).to be_persisted
       end
 
-      it "redirects to the created item_pack" do
+      it "redirects to the item" do
         post :create, item_id: item.id, item_pack: valid_attributes, session: valid_session
-        expect(response).to redirect_to(ItemPack.last)
+        expect(response).to redirect_to(item)
       end
     end
 
@@ -89,9 +89,9 @@ RSpec.describe ItemPacksController, type: :controller do
         expect(assigns(:item_pack)).to eq(item_pack)
       end
 
-      it "redirects to the item_pack" do
+      it "redirects to the item" do
         put :update, item_id: item.id, id: item_pack.to_param, item_pack: valid_attributes, session: valid_session
-        expect(response).to redirect_to(item_pack)
+        expect(response).to redirect_to(item)
       end
     end
 
@@ -109,16 +109,16 @@ RSpec.describe ItemPacksController, type: :controller do
   end
 
   describe "DELETE #destroy" do
-    let!(:item_pack) { FactoryGirl.create(:item_pack)}
+    let!(:item_pack) { FactoryGirl.create(:item_pack, item: item)}
     it "destroys the requested item_pack" do
       expect {
-        delete :destroy, item_id: item.id, id: item_pack.to_param, session: valid_session
+        delete :destroy, item_id: item_pack.item_id, id: item_pack.to_param, session: valid_session
       }.to change(ItemPack, :count).by(-1)
     end
 
-    it "redirects to the item_packs list" do
-      delete :destroy, item_id: item.id, id: item_pack.to_param, session: valid_session
-      expect(response).to redirect_to(item_item_packs_url(item_id: item.id))
+    it "redirects to the item" do
+      delete :destroy, item_id: item_pack.item_id, id: item_pack.to_param, session: valid_session
+      expect(response).to redirect_to(item_pack.item)
     end
   end
 
