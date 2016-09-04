@@ -1,0 +1,8 @@
+<tr>
+  <td><%= order_item.quantity %> x</td>
+  <td colspan="2"><%= order_item.item.code %></td>
+  <td><%= number_to_currency(order_item.subtotal) %></td>
+  <td><%= link_to 'Edit', edit_order_item_path(order_item) %></td>
+  <td><%= link_to 'Remove', order_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
+<%= render order_item.order_item_histories %>

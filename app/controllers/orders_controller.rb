@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_customer
 
   # GET /orders
   # GET /orders.json
@@ -10,11 +11,12 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
+    @order_items = @order.order_items
   end
 
   # GET /orders/new
   def new
-    @order = Order.new
+    @order = Order.new(customer: @customer)
   end
 
   # GET /orders/1/edit
@@ -24,7 +26,7 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(order_params)
+    @order = Order.new(order_params.merge(customer: @customer))
 
     respond_to do |format|
       if @order.save
@@ -65,6 +67,11 @@ class OrdersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_order
       @order = Order.find(params[:id])
+    end
+
+    # This is just placeholder. Assume usual user session stuff
+    def set_customer
+      @customer = Customer.first
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

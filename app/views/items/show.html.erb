@@ -10,5 +10,24 @@
   <%= @item.name %>
 </p>
 
+<p>
+  <strong>Packs:</strong>
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= render @item_packs %>
+  </tbody>
+</table>
+<br>
+<%= link_to 'Add Pack', new_item_item_pack_path(@item) %> |
 <%= link_to 'Edit', edit_item_path(@item) %> |
 <%= link_to 'Back', items_path %>

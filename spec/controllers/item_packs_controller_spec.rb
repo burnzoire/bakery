@@ -1,38 +1,40 @@
 require 'rails_helper'
 
 RSpec.describe ItemPacksController, type: :controller do
+  let!(:item) { FactoryGirl.create(:item) }
+
   let(:valid_attributes) { FactoryGirl.attributes_for(:item_pack) }
 
   let(:invalid_attributes) { FactoryGirl.attributes_for(:item_pack, price: "free") }
 
   let(:valid_session) { {} }
 
-  let(:item_pack) { FactoryGirl.create(:item_pack)}
+  let(:item_pack) { FactoryGirl.create(:item_pack, item: item)}
 
   describe "GET #index" do
     it "assigns all item_packs as @item_packs" do
-      get :index, params: {}, session: valid_session
-      expect(assigns(:item_packs)).to eq([item_pack])
+      get :index, item_id: item.id, session: valid_session
+      expect(assigns(:item_packs)).to eq(item.item_packs)
     end
   end
 
   describe "GET #show" do
     it "assigns the requested item_pack as @item_pack" do
-      get :show, id: item_pack.to_param, session: valid_session
+      get :show, item_id: item.id, id: item_pack.to_param, session: valid_session
       expect(assigns(:item_pack)).to eq(item_pack)
     end
   end
 
   describe "GET #new" do
     it "assigns a new item_pack as @item_pack" do
-      get :new, params: {}, session: valid_session
+      get :new, item_id: item.id, session: valid_session
       expect(assigns(:item_pack)).to be_a_new(ItemPack)
     end
   end
 
   describe "GET #edit" do
     it "assigns the requested item_pack as @item_pack" do
-      get :edit, id: item_pack.to_param, session: valid_session
+      get :edit, item_id: item.id, id: item_pack.to_param, session: valid_session
       expect(assigns(:item_pack)).to eq(item_pack)
     end
   end
@@ -41,30 +43,30 @@ RSpec.describe ItemPacksController, type: :controller do
     context "with valid params" do
       it "creates a new ItemPack" do
         expect {
-          post :create, item_pack: valid_attributes, session: valid_session
+          post :create, item_id: item.id, item_pack: valid_attributes, session: valid_session
         }.to change(ItemPack, :count).by(1)
       end
 
       it "assigns a newly created item_pack as @item_pack" do
-        post :create, item_pack: valid_attributes, session: valid_session
+        post :create, item_id: item.id, item_pack: valid_attributes, session: valid_session
         expect(assigns(:item_pack)).to be_a(ItemPack)
         expect(assigns(:item_pack)).to be_persisted
       end
 
-      it "redirects to the created item_pack" do
-        post :create, item_pack: valid_attributes, session: valid_session
-        expect(response).to redirect_to(ItemPack.last)
+      it "redirects to the item" do
+        post :create, item_id: item.id, item_pack: valid_attributes, session: valid_session
+        expect(response).to redirect_to(item)
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved item_pack as @item_pack" do
-        post :create, item_pack: invalid_attributes, session: valid_session
+        post :create, item_id: item.id, item_pack: invalid_attributes, session: valid_session
         expect(assigns(:item_pack)).to be_a_new(ItemPack)
       end
 
       it "re-renders the 'new' template" do
-        post :create, item_pack: invalid_attributes, session: valid_session
+        post :create, item_id: item.id, item_pack: invalid_attributes, session: valid_session
         expect(response).to render_template("new")
       end
     end
@@ -77,46 +79,46 @@ RSpec.describe ItemPacksController, type: :controller do
       }
 
       it "updates the requested item_pack" do
-        put :update, id: item_pack.to_param, item_pack: new_attributes, session: valid_session
+        put :update, item_id: item.id, id: item_pack.to_param, item_pack: new_attributes, session: valid_session
         item_pack.reload
         expect(item_pack.price).to eq(new_attributes[:price])
       end
 
       it "assigns the requested item_pack as @item_pack" do
-        put :update, id: item_pack.to_param, item_pack: valid_attributes, session: valid_session
+        put :update, item_id: item.id, id: item_pack.to_param, item_pack: valid_attributes, session: valid_session
         expect(assigns(:item_pack)).to eq(item_pack)
       end
 
-      it "redirects to the item_pack" do
-        put :update, id: item_pack.to_param, item_pack: valid_attributes, session: valid_session
-        expect(response).to redirect_to(item_pack)
+      it "redirects to the item" do
+        put :update, item_id: item.id, id: item_pack.to_param, item_pack: valid_attributes, session: valid_session
+        expect(response).to redirect_to(item)
       end
     end
 
     context "with invalid params" do
       it "assigns the item_pack as @item_pack" do
-        put :update, id: item_pack.to_param, item_pack: invalid_attributes, session: valid_session
+        put :update, item_id: item.id, id: item_pack.to_param, item_pack: invalid_attributes, session: valid_session
         expect(assigns(:item_pack)).to eq(item_pack)
       end
 
       it "re-renders the 'edit' template" do
-        put :update, id: item_pack.to_param, item_pack: invalid_attributes, session: valid_session
+        put :update, item_id: item.id, id: item_pack.to_param, item_pack: invalid_attributes, session: valid_session
         expect(response).to render_template("edit")
       end
     end
   end
 
   describe "DELETE #destroy" do
-    let!(:item_pack) { FactoryGirl.create(:item_pack)}
+    let!(:item_pack) { FactoryGirl.create(:item_pack, item: item)}
     it "destroys the requested item_pack" do
       expect {
-        delete :destroy, id: item_pack.to_param, session: valid_session
+        delete :destroy, item_id: item_pack.item_id, id: item_pack.to_param, session: valid_session
       }.to change(ItemPack, :count).by(-1)
     end
 
-    it "redirects to the item_packs list" do
-      delete :destroy, id: item_pack.to_param, session: valid_session
-      expect(response).to redirect_to(item_packs_url)
+    it "redirects to the item" do
+      delete :destroy, item_id: item_pack.item_id, id: item_pack.to_param, session: valid_session
+      expect(response).to redirect_to(item_pack.item)
     end
   end
 

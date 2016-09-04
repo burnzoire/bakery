@@ -1,9 +1,28 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Customer:</strong>
-  <%= @order.customer %>
+  <strong>Created:</strong>
+  <%= @order.created_at.strftime("%m/%d/%Y") %>
 </p>
 
-<%= link_to 'Edit', edit_order_path(@order) %> |
+<table>
+  <thead>
+    <tr>
+      <th colspan="3">Item</th>
+      <th>Subtotal</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= render @order_items %>
+  </tbody>
+</table>
+<p>
+  <strong>Total:</strong>
+  <%= number_to_currency(@order.total) %>
+</p>
+<br>
+<%= link_to 'Add New Item', new_order_order_item_path(order_id: @order.id) %> |
+<%= link_to 'Edit Details', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>

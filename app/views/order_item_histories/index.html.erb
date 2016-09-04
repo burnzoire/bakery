@@ -1,28 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Order Item Histories</h1>
-
 <table>
   <thead>
     <tr>
       <th>Order item</th>
       <th>Quantity</th>
-      <th>Price</th>
+      <th>Subtotal</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @order_item_histories.each do |order_item_history| %>
-      <tr>
-        <td><%= order_item_history.order_item %></td>
-        <td><%= order_item_history.quantity %></td>
-        <td><%= order_item_history.price %></td>
-        <td><%= link_to 'Show', order_item_history %></td>
-        <td><%= link_to 'Edit', edit_order_item_history_path(order_item_history) %></td>
-        <td><%= link_to 'Destroy', order_item_history, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+    <%= render @order_item_histories %>
   </tbody>
 </table>
 

@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe OrderItemHistory, type: :model do
-	it { is_expected.to belong_to(:order_item) }
+  it { is_expected.to belong_to(:order_item) }
+  it { is_expected.to belong_to(:item_pack) }
 
   it { is_expected.to validate_numericality_of(:quantity) }
-  it { is_expected.to validate_numericality_of(:price) }
+  it { is_expected.to validate_numericality_of(:price_per_pack) }
 end
