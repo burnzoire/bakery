@@ -79,7 +79,7 @@ RSpec.describe OrderItemHistoriesController, type: :controller do
       it "updates the requested order_item_history" do
         put :update, order_item_id: order_item.id, id: order_item_history.to_param, order_item_history: new_attributes, session: valid_session
         order_item_history.reload
-        expect(order_item_history.price_per_pack).to eq(new_attributes[:price_per_pack])
+        expect(order_item_history.price_per_pack.to_s).to eq(new_attributes[:price_per_pack].to_s)
       end
 
       it "assigns the requested order_item_history as @order_item_history" do

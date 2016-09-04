@@ -2,7 +2,7 @@ class OrderItem < ActiveRecord::Base
   belongs_to :order
   belongs_to :item
   has_many :order_item_histories, autosave: true, dependent: :destroy
-  before_validation :build_order_item_histories
+  before_create :build_order_item_histories
 
   validates_numericality_of :quantity
   
