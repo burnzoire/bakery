@@ -76,12 +76,12 @@ docker-compose up
 Tests can be run from with the following (with documentation formatting):
 
 ```
-docker-compose run --rm -e RAILS_ENV=test web rspec -f -d . 
+docker-compose run --rm -e RAILS_ENV=test web rspec -f d . 
 ```
 
 ## UI
 
-Of course the UI is basic but I felt it fits the brief OK. It can be accessed at `http://localhost:3000/orders`. Create an order, and then add items as desired... yum yum. Items and their packs can be modified from `http://localhost:3000/items`.
+Of course the UI is basic but I felt it fits the brief OK. It can be accessed at `http://localhost:3000`. Create an order, and then add items as desired... yum yum. Items and their packs can be modified from `http://localhost:3000/items`.
 
 
 ## Notes
@@ -90,8 +90,10 @@ The main spec to confirm correct distribution of item packs can be seen in `spec
 
 A few types of specs were omitted for this challenge as I felt the important specs were in the models and controllers.
 
-With a bit more time, the few areas would be improved:
+With a bit more time, a couple of areas would be improved:
 
-- Adding an order item of an existing item should add to the quantity rather than appearing as another order item (validating uniqueness on item_id).
+- adding an order item of an existing item should add to the quantity rather than appearing as another order item (validating uniqueness on item_id).
 
-- Add the ability to edit an order item - currently the order item histories are built before creation, I'd prefer to allow existing histories to be updated as quantity is updates.
+- add the ability to edit an order item - currently the order item histories are built before creation, I'd prefer to allow existing histories to be updated as quantity is updates via first_or_initialize.
+
+- more tests!
