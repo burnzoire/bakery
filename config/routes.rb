@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   end
   
   resources :customers
+
+  root 'orders#index' # for demo purposes
 end
