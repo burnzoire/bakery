@@ -1,5 +1,7 @@
 # Coding Challenge Brief
 
+Author: Nathan Burns <burnzoire@gmail.com>
+
 ## Bakery
 
 ### Background:  
