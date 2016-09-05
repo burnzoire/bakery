@@ -4,4 +4,6 @@ class Item < ActiveRecord::Base
 
   validates :code, presence: true, uniqueness: true, allow_blank: false
   validates :name, presence: true, allow_blank: false
+
+  accepts_nested_attributes_for :item_packs
 end
