@@ -86,7 +86,7 @@ Of course the UI is basic but I felt it fits the brief OK. It can be accessed at
 
 ## Notes
 
-The main spec to confirm correct distribution of item packs can be seen in `spec/models/order_item_spec.rb`.
+The main spec to confirm correct distribution of item packs can be seen in `spec/models/order_spec.rb`.
 
 A few types of specs were omitted for this challenge as I felt the important specs were in the models and controllers.
 
