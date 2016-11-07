@@ -3,9 +3,9 @@ development: &default
   encoding: unicode
   database: bakery_development
   pool: 5
-  username: postgres
+  username: rails
   password: password
-  host: db
+  host: localhost #db
 
 test:
   <<: *default
